@@ -1,0 +1,11 @@
+config.py
+bin/
+etc/
+__pycache__/
+lib/
+pip-selfcheck.json
+pyvenv
+share/
+*.cfg
+*.ipynb
+.ipynb_checkpoints/
