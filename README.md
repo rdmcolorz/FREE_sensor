@@ -4,7 +4,15 @@ FREE Sensor is a device firefighters use to detect harmful gasses and to track s
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Setup IBM cloud database access:
+    `pip3 install ibm_db`
+Go to IBM Cloud and create a db2 
+
+Current version is using the IBM Db2 on Cloud feature. 
+Create a Db2 service by selecting `Resources` > `Create resource` > search for `Db2`. 
+For future project might consider `Db2 Warehouse` for data analyitics. For now we are using the free version which comes with 200 MB of data storage for testing.
+
+Please message Taylor to get credentials for the Db2 on cloud otherwise you won't be able to run the code.
 
 ### Prerequisites
 

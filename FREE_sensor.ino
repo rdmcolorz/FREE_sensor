@@ -8,16 +8,18 @@ Adafruit_SHT31 sht31 = Adafruit_SHT31();
 byte inByte;
 //bool sdInitSuccess = false; //card init status
 File myFile;
-File readFile;
+
 String readText;
 char readCharArray[128];
 unsigned long fileSize;
 unsigned long filePos = 0;
-String FILE_NAME = "data1.txt";
+String FILE_NAME = "data13.txt";
 byte DEBUG = 0;
+String STATE;
 
 void setup() 
 {
+  STATE = "WRITE";
   Serial.begin(9600);
   while (!Serial) {
     ; //wait for the serial port to connect.
@@ -58,23 +60,6 @@ void setup()
 //  return readCharArray;
 //}
 
-String read_file(File &myFile) { //read until n
-  int i = 0;
-  myFile.seek(filePos); //read from current filepos
-  
-  do {
-    if (myFile.peek() != -1) { //check if file is empty
-      readCharArray[i++] = myFile.read(); //read otherwise
-      filePos++; //advance the filepos
-    }
-  } while (myFile.peek() != -1); //if not eof | \n
-  if (myFile.peek() == -1) { //if eof reached
-    filePos = 0; //if eof, reset to start pos
-  }
-  readCharArray[i - 1] = '\0'; //remove the extra \n
-  return readCharArray;
-}
-
 String ENDF2(String &p_line, int &p_start, char p_delimiter) {
 //EXTRACT NEXT DELIMITED FIELD VERSION 2
 //Extract fields from a line one at a time based on a delimiter.
@@ -100,6 +85,14 @@ String ENDF2(String &p_line, int &p_start, char p_delimiter) {
   }
 }
 
+void writeString(String stringData) { // Used to serially push out a String with Serial.write()
+
+  for (int i = 0; i < stringData.length(); i++) {
+    Serial.write(stringData[i]);   // Push each char 1 by 1 on each loop pass
+  }
+  Serial.write('\n');
+}
+
 String read_all(File &myFile) {
   String l_line;
     l_line.reserve(128); //Avoids heap memory fragmentation
@@ -109,34 +102,29 @@ String read_all(File &myFile) {
       l_line.trim();
       if (l_line != "") {
         int l_start_posn = 0;
-        while (l_start_posn != -1)
-          Serial.println(ENDF2(l_line,l_start_posn,'\n'));
-        //
+        while (l_start_posn != -1) {
+          String outline;
+          outline = ENDF2(l_line,l_start_posn,'\n');
+          writeString(outline);
+        }
       } //skip blank (NULL) lines
     }//Read the file line by line
-    myFile.close();
 }
 
-void loop() 
-{
+
+void write_data() {
+// writes sensor data to sdcard, currently only temperature and humidity from sht31
+// board
+// Closing the file actually copies the partial buffer to the file, and closes the file.
+// It is that copying of the buffer to the file that takes most of the time.
+
   float t = sht31.readTemperature();
   float h = sht31.readHumidity();
-
+  
   if (DEBUG) {
     Serial.print(t);
     Serial.print(",");
     Serial.println(h);
-  }
-  if (Serial.available() > 0) {
-    inByte = Serial.read();
-    if (inByte == '1') { // when we want to read the recorded file to the cloud
-      String output_file;
-      readFile = SD.open(FILE_NAME, FILE_READ);
-      if (readFile) {
-        read_all(readFile);
-        readFile.close();
-      }
-    }
   }
   
   myFile = SD.open(FILE_NAME, FILE_WRITE);
@@ -146,18 +134,54 @@ void loop()
       myFile.print(",");
       myFile.println(h);
       myFile.close(); //this writes to the card
-      if (DEBUG) Serial.println("* wrote to file *");
     }
     else { 
       if (DEBUG) Serial.println("Failed to read sht31 (temperature/humidity)");
     }
   }
   else { 
-    //else show error
     if (DEBUG) Serial.println("Error opeing file.\n");
   }
   delay(1000);
 }
+
+void read_data() {
+// writes data read from the file on the microSD card through Serial.write()
+// after reading the file, the esp will go into standby mode and will not
+// write any data into file.
+
+  myFile = SD.open(FILE_NAME);
+  
+  if (myFile) {
+    read_all(myFile);
+  }
+  STATE = "STANDBY";
+  myFile.close();
+}
+
+void loop() 
+{
+  if (Serial.available() > 0) {
+    inByte = Serial.read();
+  }
+  if (inByte == '1') { // when we want to read the recorded file to the cloud
+    STATE = "READ";
+  }
+  
+  if (STATE == "READ") {
+    read_data(); 
+  }
+  if (STATE == "STANDBY") {
+    if (DEBUG) {
+      Serial.println("***********");
+      Serial.println("Standing by");
+    }
+  }
+  if (STATE == "WRITE") {
+    write_data();
+  }
+}
+
 //    else if (inByte == 'r' || inByte == 'R') {
 //      if (sdInitSuccess) { //proceed only if card is initialized
 //        myFile = SD.open("TEST.txt");

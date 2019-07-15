@@ -1,15 +1,29 @@
 import serial
+import time
 
-esp = serial.Serial('/dev/cu.SLAB_USBtoUART')
+ # the port connecting to ESP8266
+PORT = '/dev/cu.SLAB_USBtoUART'
+TABLE = 'new_table3'
+COLUMNS = '(temperature, humidity)'
 
-def get_data_from_sdcard():
+insert_data_head = "INSERT INTO {}{} VALUES ".format(TABLE, COLUMNS)
+
+# TODO: Make a function that takes all / N data and 
+# returns a sql command that uploads it to the IBM db
+# have to know when to stop reading from serial port.
+def serial2sql(port, sql_insert):
+
+    esp = serial.Serial(PORT)
     esp.write(b'1')
-    while True:
-        line = esp.readline()
-        if line:
-            #line = line.decode("utf-8")
-            print(line)
-            # esp.close()
-            # break
+    time.sleep(1)
+    while esp.is_open:
+        byte_line = esp.readline()[:-2]
+        line = byte_line.decode('utf-8')
+        value = '(' + line + '),'
+        sql_insert += value
+        print(line)
+    return sql_insert
 
-get_data_from_sdcard()
+sql = serial2sql(PORT, insert_data_head)
+print(sql)
+print(len(sql) - 53)
