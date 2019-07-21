@@ -19,6 +19,8 @@ def serial2sql(port, sql_insert):
     while esp.is_open:
         byte_line = esp.readline()[:-2]
         line = byte_line.decode('utf-8')
+        if line == "END":
+            break
         value = '(' + line + '),'
         sql_insert += value
         print(line)

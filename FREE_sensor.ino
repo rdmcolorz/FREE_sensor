@@ -13,7 +13,7 @@ String readText;
 char readCharArray[128];
 unsigned long fileSize;
 unsigned long filePos = 0;
-String FILE_NAME = "data13.txt";
+String FILE_NAME = "data17.txt";
 byte DEBUG = 0;
 String STATE;
 
@@ -31,7 +31,7 @@ void setup()
     if (DEBUG) Serial.println("Couldn't find SHT31");
     while (1) delay(1);
   }
-
+  delay(500);
   Serial.println("Setup SD");
   // start up the SD card reader at pin D8
   if (!SD.begin(D8)) {
@@ -169,7 +169,8 @@ void loop()
   }
   
   if (STATE == "READ") {
-    read_data(); 
+    read_data();
+    Serial.println("END");
   }
   if (STATE == "STANDBY") {
     if (DEBUG) {
