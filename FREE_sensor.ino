@@ -13,7 +13,7 @@ String readText;
 char readCharArray[128];
 unsigned long fileSize;
 unsigned long filePos = 0;
-String FILE_NAME = "data17.txt";
+String FILE_NAME = "data19.txt";
 byte DEBUG = 0;
 String STATE;
 
@@ -142,7 +142,6 @@ void write_data() {
   else { 
     if (DEBUG) Serial.println("Error opeing file.\n");
   }
-  delay(1000);
 }
 
 void read_data() {
@@ -167,6 +166,9 @@ void loop()
   if (inByte == '1') { // when we want to read the recorded file to the cloud
     STATE = "READ";
   }
+  else if (inByte == '2') {
+    STATE = "WRITE";
+  }
   
   if (STATE == "READ") {
     read_data();
@@ -180,6 +182,7 @@ void loop()
   }
   if (STATE == "WRITE") {
     write_data();
+    delay(5000);
   }
 }
 

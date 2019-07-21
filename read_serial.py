@@ -23,9 +23,6 @@ def serial2sql(port, sql_insert):
             break
         value = '(' + line + '),'
         sql_insert += value
-        print(line)
-    return sql_insert
+    return sql_insert[:-1] # don't need the last comma
 
 sql = serial2sql(PORT, insert_data_head)
-print(sql)
-print(len(sql) - 53)
