@@ -1,4 +1,5 @@
 config.py
+data_generation.py
 bin/
 etc/
 __pycache__/
@@ -8,4 +9,5 @@ pyvenv
 share/
 *.cfg
 *.ipynb
+*.csv
 .ipynb_checkpoints/
