@@ -2,17 +2,22 @@
 
 FREE Sensor is a device firefighters use to detect harmful gasses and to track status of individual firefighters. 
 
-## Getting Started with IBM cloud db2
+## IBM Cloud services
 
-Setup IBM cloud database access: 
-`pip3 install ibm_db`
-Go to IBM Cloud and create a db2 
+`IBM Watson IoT Platform` for streaming IoT data and managing IoT devices 
+`Cloudant` database for storing history IoT data
+`IBM Watson Studio / Data refinery` for data transformation and parsing
+`IBM Watson Studio / Cognos Dashboard` for data visualization and analytics
 
-Current version is using the IBM Db2 on Cloud feature. 
-Create a Db2 service by selecting `Resources` > `Create resource` > search for `Db2`. 
-For future project might consider `Db2 Warehouse` for data analyitics. For now we are using the free version which comes with 200 MB of data storage for testing.
+## Getting Started
 
-Please message Taylor to get credentials for the Db2 on cloud otherwise you won't be able to run the code.
+Follow this [tutorial](https://developer.ibm.com/recipes/tutorials/run-an-esp8266arduino-as-a-iot-foundation-managed-device/) to connect ESP8266 with the IoT platform. For current setup, on the IBM Watson IoT Platform, change `Default Rule` in `Security` to `TLS Optional` to connect with ESP.
+
+To setup history database for IoT data, go to `Extensions` > `Histroical Data Storage` and choose the `Cloudant` service you have created.
+
+Open `IBM Watson Studio` to get access to the database and add connection.
+
+Please message [Taylor](rainbowwww5@gmail.com) to be added to the Watson Studio project.
 
 ### Prerequisites
 
