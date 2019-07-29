@@ -4,10 +4,10 @@ FREE Sensor is a device firefighters use to detect harmful gasses and to track s
 
 ## IBM Cloud services
 
-`IBM Watson IoT Platform` for streaming IoT data and managing IoT devices 
-`Cloudant` database for storing history IoT data
-`IBM Watson Studio / Data refinery` for data transformation and parsing
-`IBM Watson Studio / Cognos Dashboard` for data visualization and analytics
+`IBM Watson IoT Platform` for streaming IoT data and managing IoT devices  
+`Cloudant` database for storing history IoT data  
+`IBM Watson Studio / Data refinery` for data transformation and parsing  
+`IBM Watson Studio / Cognos Dashboard` for data visualization and analytics  
 
 ## Getting Started
 
