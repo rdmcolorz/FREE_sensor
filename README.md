@@ -3,7 +3,8 @@ _"Wildfires have changed, It's time the technology to fight them does too."_
 
 FREE Sensor is a device firefighters use to detect harmful gasses and to track status of individual firefighters. 
 
-![title](https://i.imgur.com/H8oRhBN.png'mockup')
+[![title](https://i.imgur.com/H8oRhBN.png'mockup')](https://www.youtube.com/watch?v=VxR_2ukg1jU)
+_click for video_
 
 ## IBM Cloud services
 
@@ -43,7 +44,3 @@ Our early prototyping consisted of taking individual sensor components and produ
 
 One major setback we faced was the original CO sensor we used. The sensor die had an operating temperature of over 100°C. This was a massive drain on our battery, and ultimately the bottleneck in miniturizing our device. Thankfully, we found an alternative sensor that has an extremely low-power profile and rated to remain opperational for nearly ten years. This significantly freed up constraints on how small and light our device could become.
 Once we tested all the sensors and had their output saving accurately, we combined their output into a test .csv to feed into the IBM cloud. Once on the cloud, we could start analyzing and visualizing the data using IBM computing services. This allowed us to produce remarkable information from our sensor data.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
