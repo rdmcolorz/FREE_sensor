@@ -38,7 +38,7 @@ Our early prototyping consisted of taking individual sensor components and produ
 ![foo](https://i.imgur.com/jlkXenY.png "Prototype 1")
 ![bar](https://i.imgur.com/ByfHudn.png "Prototype 2")
 
-One major setback we faced was the original CO sensor we used. The sensor die had an operating temperature over 100°C. This was a massive drain on our battery, and ultimately the bottleneck for miniturizing our device. Thankfully, we found an alternative sensor that has an extremely low power profile and rated to last nearly ten years. This significantly freed up constraints on how small and light our device could become.
+One major setback we faced was the original CO sensor we used. The sensor die had an operating temperature of over 100°C. This was a massive drain on our battery, and ultimately the bottleneck in miniturizing our device. Thankfully, we found an alternative sensor that has an extremely low-power profile and rated to remain opperational for nearly ten years. This significantly freed up constraints on how small and light our device could become.
 Once we tested all the sensors and had their output saving accurately, we combined their output into a test .csv to feed into the IBM cloud. Once on the cloud, we could start analyzing and visualizing the data using IBM computing services. This allowed us to produce remarkable information from our sensor data.
 
 ## License
