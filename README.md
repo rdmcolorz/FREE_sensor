@@ -1,4 +1,5 @@
 # FREE Sensor
+_"Wildfires have changed, It's time the technology to fight them does too."_
 
 FREE Sensor is a device firefighters use to detect harmful gasses and to track status of individual firefighters. 
 
