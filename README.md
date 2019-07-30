@@ -2,6 +2,8 @@
 
 FREE Sensor is a device firefighters use to detect harmful gasses and to track status of individual firefighters. 
 
+![title](https://i.imgur.com/H8oRhBN.png'mockup')
+
 ## IBM Cloud services
 
 `IBM Watson IoT Platform` for streaming IoT data and managing IoT devices  
