@@ -33,10 +33,13 @@ For Taylor's setup you will be using these hardware products:
 
 ## Prototyping
 
-Our early prototyping consisted of taking individual components and producing a serial communication readout out the live data. We used the NodeMCU controller to drive the other sensors. 
+Our early prototyping consisted of taking individual sensor components and producing a serial communication readout of the live data. We used the NodeMCU controller to drive the other sensors. 
 
 ![foo](https://i.imgur.com/jlkXenY.png "Prototype 1")
 ![bar](https://i.imgur.com/ByfHudn.png "Prototype 2")
+
+One major setback we faced was the original CO sensor we used. The sensor die had an operating temperature over 100°C. This was a massive drain on our battery, and ultimately the bottleneck for miniturizing our device. Thankfully, we found an alternative sensor that has an extremely low power profile and rated to last nearly ten years. This significantly freed up constraints on how small and light our device could become.
+Once we tested all the sensors and had their output saving accurately, we combined their output into a test .csv to feed into the IBM cloud. Once on the cloud, we could start analyzing and visualizing the data using IBM computing services. This allowed us to produce remarkable information from our sensor data.
 
 ## License
 
